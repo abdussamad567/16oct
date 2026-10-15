@@ -1,0 +1,354 @@
+/* ============================================================
+   PHOTO MEMORIES — Gift 1: Bestie Memories (Natural Scroll)
+   ============================================================ */
+
+.photo-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(12px, env(safe-area-inset-right)) max(56px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+}
+
+.pm-bg-decorations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.pm-bg-heart {
+  position: absolute;
+  font-size: 1.3rem;
+  opacity: 0.35;
+  animation: floatDrift 5s ease-in-out infinite alternate;
+}
+
+/* Burst Particles */
+.pm-burst-heart {
+  position: fixed;
+  bottom: 45%;
+  pointer-events: none;
+  z-index: 35;
+  animation: heartBurst 1.6s ease-out forwards;
+}
+
+/* Camera Flash */
+.pm-flash {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 40;
+  animation: cameraFlash 0.25s ease-out forwards;
+  pointer-events: none;
+}
+
+/* Main Card */
+.photo-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--pink-border);
+  border-radius: 26px;
+  box-shadow: 0 16px 48px rgba(216, 30, 91, 0.16);
+  width: min(600px, 96vw);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.pm-header {
+  background: linear-gradient(135deg, #ff85a2 0%, #f43f6e 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 14px rgba(216, 30, 91, 0.2);
+}
+
+.pm-header-text {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.pm-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pm-subtitle {
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  opacity: 0.92;
+  margin-top: 1px;
+}
+
+/* Camera Wrap & Body */
+.pm-camera-wrap {
+  padding: 16px 16px 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.pm-camera-body {
+  background: #3e222a;
+  border: 3px solid #f9a8be;
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(74, 21, 37, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  width: 100%;
+  max-width: 480px;
+}
+
+.pm-camera-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 6px 8px;
+}
+
+.pm-camera-flash-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 10px #ffd166;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.pm-camera-brand {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fedce6;
+  letter-spacing: 1px;
+}
+
+.pm-camera-mode {
+  font-family: monospace;
+  font-size: 11px;
+  color: #ffb8cd;
+  font-weight: 700;
+}
+
+/* Viewfinder — Natural Aspect Ratio */
+.pm-viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 48vh;
+  background: #251219;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #5d2a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pm-main-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeIn 0.3s ease;
+}
+
+.pm-viewfinder--placeholder .pm-viewfinder-placeholder {
+  display: flex !important;
+}
+
+.pm-viewfinder-placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: #fca5bc;
+  text-align: center;
+  padding: 16px;
+  line-height: 1.5;
+}
+
+/* Corner Guides */
+.vf-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(255, 255, 255, 0.65);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.vf-tl { top: 8px; left: 8px;  border-width: 2px 0 0 2px; }
+.vf-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.vf-bl { bottom: 8px; left: 8px;  border-width: 0 0 2px 2px; }
+.vf-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+/* Camera Bottom Bar */
+.pm-camera-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px 2px;
+  gap: 8px;
+}
+
+.pm-nav-btn {
+  background: #5d2a3a;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.pm-nav-btn:hover {
+  background: var(--pink-rose);
+  transform: scale(1.08);
+}
+
+.pm-nav-btn:active {
+  transform: scale(0.94);
+}
+
+.pm-caption {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fedce6;
+  text-align: center;
+  flex: 1;
+}
+
+/* Thumbnails */
+.pm-thumbnails {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  overflow-x: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pm-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #fff0f3;
+  transition: border-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--pink-rose);
+}
+
+.pm-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pm-thumb:hover {
+  transform: scale(1.08);
+  border-color: var(--pink-border);
+}
+
+.pm-thumb--active {
+  border-color: var(--pink-rose);
+  transform: scale(1.08);
+  box-shadow: 0 2px 10px rgba(216, 30, 91, 0.3);
+}
+
+/* Action Buttons Footer */
+.pm-footer-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 16px 18px;
+  flex-wrap: wrap;
+}
+
+.pm-bottom-back-btn {
+  background: #ffffff;
+  color: var(--text-burgundy);
+  border: 1.5px solid var(--pink-border);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 44px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.pm-bottom-back-btn:hover {
+  background: #fff0f3;
+  transform: translateX(-2px);
+}
+
+.pm-heart-burst-btn {
+  background: linear-gradient(135deg, #f43f6e 0%, #d81e5b 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-height: 44px;
+  padding: 8px 24px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(216, 30, 91, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pm-heart-burst-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(216, 30, 91, 0.45);
+}
+
+.pm-heart-burst-btn:active {
+  transform: scale(0.97);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .photo-screen {
+    padding: max(72px, env(safe-area-inset-top) + 56px) 10px 48px 10px;
+  }
+  .pm-header { padding: 10px 14px; }
+  .pm-camera-body { border-radius: 14px; padding: 8px; }
+  .pm-thumb { width: 44px; height: 44px; }
+  .pm-caption { font-size: 1.1rem; }
+  .pm-title { font-size: 1.15rem; }
+  .pm-subtitle { font-size: 0.82rem; }
+  .pm-viewfinder { max-height: 40vh; }
+}

@@ -1,0 +1,192 @@
+/* ============================================================
+   LETTER SCREEN — Pink Scrapbook Handwritten Letter
+   ============================================================ */
+
+.letter-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(12px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  z-index: 10;
+}
+
+.letter-bg-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.letter-float-heart {
+  position: absolute;
+  font-size: 1.3rem;
+  opacity: 0.35;
+  animation: floatDrift 5s ease-in-out infinite alternate;
+}
+
+.letter-card {
+  background: #ffffff;
+  border: 2px solid var(--pink-border);
+  border-radius: 24px;
+  max-width: 520px;
+  width: 96%;
+  box-shadow: 0 16px 44px rgba(216, 30, 91, 0.16);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.letter-card--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scalloped top & bottom borders */
+.letter-border-top,
+.letter-border-bottom {
+  height: 22px;
+  background: linear-gradient(90deg, #ff85a2 0%, #f43f6e 50%, #ff85a2 100%);
+  position: relative;
+}
+
+.letter-border-top {
+  clip-path: polygon(
+    0 0, 4% 0, 4% 100%,
+    8% 40%, 12% 100%, 16% 40%,
+    20% 100%, 24% 40%, 28% 100%,
+    32% 40%, 36% 100%, 40% 40%,
+    44% 100%, 48% 40%, 52% 100%,
+    56% 40%, 60% 100%, 64% 40%,
+    68% 100%, 72% 40%, 76% 100%,
+    80% 40%, 84% 100%, 88% 40%,
+    92% 100%, 96% 40%, 100% 100%,
+    100% 0
+  );
+  height: 24px;
+}
+
+.letter-border-bottom {
+  clip-path: polygon(
+    0 100%, 4% 100%, 4% 0,
+    8% 60%, 12% 0, 16% 60%,
+    20% 0, 24% 60%, 28% 0,
+    32% 60%, 36% 0, 40% 60%,
+    44% 0, 48% 60%, 52% 0,
+    56% 60%, 60% 0, 64% 60%,
+    68% 0, 72% 60%, 76% 0,
+    80% 60%, 84% 0, 88% 60%,
+    92% 0, 96% 60%, 100% 0,
+    100% 100%
+  );
+  height: 24px;
+}
+
+.letter-inner {
+  padding: 22px 28px 20px;
+}
+
+.letter-top-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--pink-rose);
+  margin-bottom: 8px;
+}
+
+.letter-deco-heart {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.letter-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+  color: var(--text-burgundy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.letter-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pink-border), transparent);
+  margin: 10px 0 16px;
+}
+
+.letter-divider-sm {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pink-border), transparent);
+  margin: 14px 0 8px;
+}
+
+.letter-body {
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+  color: var(--text-burgundy);
+  line-height: 1.6;
+}
+
+.letter-line {
+  animation: fadeInUp 0.4s ease both;
+}
+
+.letter-line--gap {
+  margin-bottom: 8px;
+}
+
+.letter-signature-wrap {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.letter-signature {
+  font-family: var(--font-dancing);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pink-rose);
+}
+
+/* Next Button */
+.letter-next-btn {
+  background: linear-gradient(135deg, #f43f6e 0%, #d81e5b 100%);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  min-height: 48px;
+  padding: 12px 34px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(216, 30, 91, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-next-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(216, 30, 91, 0.48);
+}
+
+.letter-next-btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 480px) {
+  .letter-inner { padding: 18px 18px 14px; }
+  .letter-heading { font-size: 1.45rem; }
+  .letter-body { font-size: 1.15rem; line-height: 1.5; }
+}

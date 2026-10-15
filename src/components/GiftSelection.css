@@ -1,0 +1,281 @@
+/* ============================================================
+   GIFT SELECTION — 3 Interactive Pink Gifts
+   ============================================================ */
+
+.gifts-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(12px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+.gifts-bg-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gifts-deco-mark {
+  position: absolute;
+  opacity: 0.35;
+  animation: floatDrift 5s ease-in-out infinite alternate;
+}
+
+/* Main Scrapbook Card */
+.gifts-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--pink-border);
+  border-radius: 28px;
+  box-shadow: 0 16px 48px rgba(216, 30, 91, 0.16);
+  width: min(660px, 94vw);
+  margin: auto 0;
+  overflow: hidden;
+  animation: popIn 0.5s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Wavy Top & Bottom Borders */
+.gifts-wavy-top,
+.gifts-wavy-bottom {
+  height: 22px;
+  background: linear-gradient(90deg, #ff85a2 0%, #f43f6e 50%, #ff85a2 100%);
+}
+
+.gifts-wavy-top {
+  clip-path: polygon(
+    0 0, 100% 0,
+    100% 30%, 96% 100%, 92% 30%,
+    88% 100%, 84% 30%, 80% 100%,
+    76% 30%, 72% 100%, 68% 30%,
+    64% 100%, 60% 30%, 56% 100%,
+    52% 30%, 48% 100%, 44% 30%,
+    40% 100%, 36% 30%, 32% 100%,
+    28% 30%, 24% 100%, 20% 30%,
+    16% 100%, 12% 30%, 8% 100%,
+    4% 30%, 0 100%
+  );
+}
+
+.gifts-wavy-bottom {
+  clip-path: polygon(
+    0 100%, 100% 100%,
+    100% 70%, 96% 0, 92% 70%,
+    88% 0, 84% 70%, 80% 0,
+    76% 70%, 72% 0, 68% 70%,
+    64% 0, 60% 70%, 56% 0,
+    52% 70%, 48% 0, 44% 70%,
+    40% 0, 36% 70%, 32% 0,
+    28% 70%, 24% 0, 20% 70%,
+    16% 0, 12% 70%, 8% 0,
+    4% 70%, 0 0
+  );
+}
+
+.gifts-inner {
+  padding: 28px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Heading Banner */
+.gifts-heading-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff0f3;
+  border-radius: 999px;
+  padding: 8px 24px;
+  border: 1.5px solid var(--pink-border);
+  box-shadow: 0 2px 10px rgba(216, 30, 91, 0.08);
+}
+
+.gifts-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pink-rose);
+}
+
+.gifts-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+  color: var(--text-burgundy);
+  font-weight: 700;
+}
+
+/* Gift Row */
+.gifts-row {
+  display: flex;
+  gap: 22px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Gift Box Button */
+.gift-box-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: fadeInUp 0.5s ease both;
+  min-width: 105px;
+}
+
+.gift-box-btn:hover, .gift-box-btn--hovered {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.gift-box-btn--opening {
+  animation: giftShake 0.45s ease, popIn 0.45s ease 0.45s both;
+}
+
+/* The Gift Box */
+.gift-box {
+  width: 110px;
+  filter: drop-shadow(0 6px 14px rgba(216, 30, 91, 0.2));
+  transition: filter 0.25s ease;
+}
+
+.gift-box-btn:hover .gift-box {
+  filter: drop-shadow(0 10px 22px rgba(216, 30, 91, 0.32));
+}
+
+/* Lid */
+.gift-lid {
+  width: 110px;
+  height: 30px;
+  background: linear-gradient(180deg, #ff85a2 0%, #f43f6e 100%);
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffb3c6;
+}
+
+.gift-ribbon-h {
+  position: absolute;
+  inset: 0;
+  left: 42%;
+  width: 16%;
+  background: linear-gradient(90deg, #fff0f5 0%, #ffd6e0 50%, #fff0f5 100%);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+}
+
+/* Bow */
+.gift-bow {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.bow-left, .bow-right {
+  width: 20px;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #ffe3ea 60%, #ff85a2 100%);
+  border: 1px solid #ff9ebb;
+}
+
+.bow-left  { transform: rotate(-25deg) translateX(5px); }
+.bow-right { transform: rotate(25deg) translateX(-5px); }
+
+.bow-center {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #ff85a2 100%);
+  border: 1px solid #ffb3c6;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Body */
+.gift-body {
+  width: 110px;
+  height: 84px;
+  background: linear-gradient(180deg, #ff6b8b 0%, #e63964 100%);
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ff9ebb;
+  border-top: none;
+}
+
+.gift-ribbon-v {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 42%;
+  width: 16%;
+  background: linear-gradient(90deg, #fff0f5 0%, #ffd6e0 50%, #fff0f5 100%);
+}
+
+.gift-sparkle {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.gift-label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-burgundy);
+  font-weight: 700;
+  text-align: center;
+  max-width: 115px;
+  line-height: 1.3;
+}
+
+.gifts-hint {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pink-rose);
+  opacity: 0.9;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .gifts-inner { padding: 20px 14px 16px; gap: 16px; }
+  .gifts-row { gap: 14px; }
+  .gift-box, .gift-lid { width: 88px; }
+  .gift-body { width: 88px; height: 68px; }
+  .gift-label { font-size: 0.86rem; max-width: 95px; }
+  .gifts-heading { font-size: 1.35rem; }
+}
+
+@media (max-width: 340px) {
+  .gift-box, .gift-lid { width: 78px; }
+  .gift-body { width: 78px; height: 60px; }
+  .gift-label { font-size: 0.8rem; }
+}

@@ -1,0 +1,433 @@
+/* ============================================================
+   OPENING SCREEN — Slide 1 (Pink Theme, Mobile-First)
+   ============================================================ */
+
+.opening-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.opening-screen--exit {
+  opacity: 0;
+  transform: scale(0.96) translateY(-16px);
+  pointer-events: none;
+}
+
+/* Background floating emojis */
+.opening-bg-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.opening-particle {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0.35;
+  user-select: none;
+  animation: particleFloat 5s ease-in-out infinite alternate;
+}
+
+.opening-particle.p-0 { font-size: 1rem; opacity: 0.25; }
+.opening-particle.p-1 { font-size: 1.4rem; opacity: 0.4; }
+.opening-particle.p-2 { font-size: 1.15rem; opacity: 0.3; }
+.opening-particle.p-3 { font-size: 1.6rem; opacity: 0.45; }
+
+@keyframes particleFloat {
+  0% { transform: translateY(0px) rotate(-6deg) scale(0.95); }
+  50% { transform: translateY(-22px) rotate(6deg) scale(1.05); }
+  100% { transform: translateY(-8px) rotate(-3deg) scale(1); }
+}
+
+/* Scrapbook card container */
+.opening-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--pink-border);
+  border-radius: 28px;
+  padding: 24px 22px 22px;
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(216, 30, 91, 0.15), 0 2px 10px rgba(0, 0, 0, 0.03);
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opening-card--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Decorative top ribbon */
+.opening-ribbon-accent {
+  display: flex;
+  gap: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+/* Front Page Romantic Portrait Frame */
+.opening-photo-wrapper {
+  position: relative;
+  margin: 4px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opening-photo-frame {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  border: 4px solid var(--pink-border);
+  box-shadow: 0 8px 26px rgba(216, 30, 91, 0.24), 0 0 16px rgba(244, 63, 110, 0.3);
+  overflow: hidden;
+  background: var(--pink-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.opening-photo-frame:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 12px 32px rgba(216, 30, 91, 0.35);
+}
+
+.opening-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Animated Pink Gift Box */
+.opening-gift-wrap {
+  margin: 6px 0 18px;
+  cursor: pointer;
+  perspective: 600px;
+  user-select: none;
+}
+
+.pink-gift-box {
+  position: relative;
+  width: 90px;
+  height: 85px;
+  margin: 0 auto;
+  animation: giftWiggle 3.5s ease-in-out infinite;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease;
+}
+
+.opening-gift-wrap:hover .pink-gift-box,
+.opening-gift-wrap:active .pink-gift-box {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+@keyframes giftWiggle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  20% { transform: translateY(-6px) rotate(-3deg); }
+  35% { transform: translateY(-3px) rotate(3deg); }
+  50% { transform: translateY(-5px) rotate(-1deg); }
+  65% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Gift Lid */
+.gift-lid {
+  position: relative;
+  z-index: 3;
+  width: 98px;
+  height: 24px;
+  left: -4px;
+  background: linear-gradient(180deg, #ff85a2 0%, #f45b82 100%);
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(216, 30, 91, 0.22);
+  border: 1px solid #ffb3c6;
+}
+
+.lid-ribbon-horizontal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  background: linear-gradient(90deg, #fff0f5 0%, #ffd6e0 50%, #fff0f5 100%);
+}
+
+/* Satin Bow */
+.satin-bow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 22px;
+}
+
+.bow-loop {
+  position: absolute;
+  top: 1px;
+  width: 19px;
+  height: 16px;
+  background: radial-gradient(circle at 40% 40%, #ffffff 0%, #ffe3ea 60%, #ff8ba7 100%);
+  border: 1px solid #ff9ebb;
+  border-radius: 50% 50% 20% 50%;
+}
+
+.bow-left { left: 4px; transform: rotate(-25deg); }
+.bow-right { right: 4px; transform: scaleX(-1) rotate(-25deg); }
+
+.bow-knot {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #ff85a2 100%);
+  border-radius: 50%;
+  border: 1px solid #ffb3c6;
+  z-index: 4;
+}
+
+.bow-tail {
+  position: absolute;
+  top: 14px;
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(180deg, #ff85a2 0%, #f45b82 100%);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.tail-left { left: 10px; transform: rotate(20deg) skewY(15deg); }
+.tail-right { right: 10px; transform: rotate(-20deg) skewY(-15deg); }
+
+/* Gift Box Base */
+.gift-box-base {
+  position: relative;
+  z-index: 2;
+  width: 88px;
+  height: 62px;
+  margin: -3px auto 0;
+  background: linear-gradient(180deg, #ff6b8b 0%, #e63964 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 8px 18px rgba(216, 30, 91, 0.28);
+  border: 1px solid #ff9ebb;
+  overflow: hidden;
+}
+
+.box-ribbon-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  background: linear-gradient(90deg, #fff0f5 0%, #ffd6e0 50%, #fff0f5 100%);
+}
+
+.box-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+  transform: skewX(-25deg);
+  animation: shineMove 4s ease-in-out infinite;
+}
+
+.box-heart-tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.15rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  animation: pulseTag 2s ease-in-out infinite;
+}
+
+@keyframes shineMove {
+  0%, 60% { transform: translateX(-50px) skewX(-25deg); }
+  100%    { transform: translateX(140px) skewX(-25deg); }
+}
+
+@keyframes pulseTag {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* Micro floating hearts */
+.micro-heart {
+  position: absolute;
+  font-size: 1rem;
+  pointer-events: none;
+  animation: microFloat 3s ease-in-out infinite alternate;
+}
+
+.mh-1 { top: 10px; left: -16px; animation-delay: 0.2s; }
+.mh-2 { top: -14px; right: -12px; font-size: 1.2rem; animation-delay: 0.9s; }
+.mh-3 { bottom: 12px; right: -18px; animation-delay: 1.6s; }
+
+@keyframes microFloat {
+  0%   { transform: translateY(0) scale(0.9); opacity: 0.7; }
+  100% { transform: translateY(-12px) scale(1.15); opacity: 1; }
+}
+
+/* Heading & Subtitle */
+.opening-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.3rem, 4.5vw, 1.75rem);
+  color: var(--text-burgundy);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.opening-subtitle {
+  font-family: var(--font-hand);
+  font-size: clamp(1.1rem, 3.8vw, 1.35rem);
+  color: var(--pink-rose);
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+/* Prominent Action Button */
+.opening-cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  min-height: 50px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, #f43f6e 0%, #d81e5b 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(216, 30, 91, 0.35), 0 0 16px rgba(244, 63, 110, 0.4);
+  overflow: hidden;
+  animation: pulseGlow 2.8s ease-in-out infinite;
+  user-select: none;
+}
+
+.opening-cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 26px rgba(216, 30, 91, 0.48), 0 0 22px rgba(244, 63, 110, 0.55);
+}
+
+.opening-cta-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: btnGlowPass 3.5s ease-in-out infinite;
+}
+
+@keyframes btnGlowPass {
+  0%, 40% { left: -100%; }
+  70%, 100% { left: 100%; }
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer deco */
+.opening-footer-deco {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--pink-accent);
+  opacity: 0.6;
+}
+
+.deco-sparkle { font-size: 0.85rem; }
+.deco-dot { font-size: 0.45rem; }
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .opening-card {
+    padding: 20px 16px 18px;
+    border-radius: 24px;
+  }
+  
+  .opening-photo-frame {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .pink-gift-box {
+    width: 76px;
+    height: 72px;
+  }
+  
+  .gift-lid {
+    width: 82px;
+    height: 20px;
+  }
+  
+  .gift-box-base {
+    width: 74px;
+    height: 52px;
+  }
+  
+  .opening-cta-btn {
+    min-height: 46px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .opening-photo-frame {
+    width: 105px;
+    height: 105px;
+  }
+  
+  .opening-heading {
+    font-size: 1.2rem;
+  }
+  
+  .opening-subtitle {
+    font-size: 1rem;
+  }
+}

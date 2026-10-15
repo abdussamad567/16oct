@@ -1,0 +1,375 @@
+/* ============================================================
+   QUESTION SCREEN — Slide 2 (Are you ready for this?)
+   ============================================================ */
+
+.question-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(14px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.question-screen--exit {
+  opacity: 0;
+  transform: scale(0.96) translateY(-16px);
+  pointer-events: none;
+}
+
+/* Background floating decorations */
+.q-bg-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.q-float-item {
+  position: absolute;
+  opacity: 0.35;
+  user-select: none;
+  animation: floatDrift 5s ease-in-out infinite alternate;
+}
+
+/* Main card */
+.question-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--pink-border);
+  border-radius: 28px;
+  padding: 42px 24px 28px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(216, 30, 91, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cute Cat Peeking Over Card */
+.q-cat-peeker {
+  position: absolute;
+  top: -56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.q-cat-head {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 52px;
+  background: #fff0f3;
+  border: 2px solid #f9a8be;
+  border-radius: 38px 38px 20px 20px;
+  box-shadow: 0 4px 10px rgba(216, 30, 91, 0.1);
+}
+
+.q-cat-ear {
+  position: absolute;
+  top: -10px;
+  width: 22px;
+  height: 24px;
+  background: #fff0f3;
+  border: 2px solid #f9a8be;
+  border-radius: 4px;
+}
+
+.q-cat-ear--left {
+  left: 10px;
+  transform: rotate(-18deg) skewY(-10deg);
+}
+
+.q-cat-ear--right {
+  right: 10px;
+  transform: rotate(18deg) skewY(10deg);
+}
+
+.q-ear-inner {
+  position: absolute;
+  inset: 3px;
+  background: #ffb8cd;
+  border-radius: 2px;
+}
+
+.q-cat-eyes {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.q-cat-eye {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background: #4a1525;
+  border-radius: 50%;
+}
+
+.eye-shine {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 3px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.q-cat-blush {
+  position: absolute;
+  top: 22px;
+  width: 14px;
+  height: 8px;
+  background: #ff85a2;
+  border-radius: 50%;
+  opacity: 0.65;
+}
+
+.q-cat-blush--left { left: 8px; }
+.q-cat-blush--right { right: 8px; }
+
+.q-cat-nose {
+  width: 5px;
+  height: 4px;
+  background: #f43f6e;
+  border-radius: 50%;
+  margin: 1px auto 0;
+}
+
+.q-cat-mouth {
+  font-size: 11px;
+  color: #722238;
+  line-height: 1;
+  margin-top: -2px;
+  font-family: monospace;
+}
+
+.q-cat-whiskers {
+  position: absolute;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.q-cat-whiskers span {
+  width: 12px;
+  height: 1px;
+  background: #d68096;
+}
+
+.q-cat-whiskers.left { left: 4px; transform: rotate(-5deg); }
+.q-cat-whiskers.right { right: 4px; transform: scaleX(-1) rotate(-5deg); }
+
+.q-cat-paws {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 36px;
+  z-index: 6;
+}
+
+.q-paw {
+  width: 16px;
+  height: 10px;
+  background: #fff0f3;
+  border: 2px solid #f9a8be;
+  border-radius: 8px 8px 4px 4px;
+}
+
+/* Question Content */
+.question-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.45rem, 5vw, 1.95rem);
+  color: var(--text-burgundy);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.question-subtext {
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
+  color: var(--pink-rose);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Playful toast message when NO is dodged */
+.dodge-message {
+  min-height: 28px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--pink-hot);
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background: #fff0f3;
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px dashed var(--pink-border);
+}
+
+.dodge-message--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button Arena */
+.question-action-area {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 6px;
+}
+
+/* Common Button Styles */
+.btn-choice {
+  position: relative;
+  min-width: 125px;
+  min-height: 50px;
+  padding: 12px 24px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* YES BUTTON — Stationary & Glowing */
+.btn-yes {
+  background: linear-gradient(135deg, #f43f6e 0%, #d81e5b 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(216, 30, 91, 0.35), 0 0 16px rgba(244, 63, 110, 0.4);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+  z-index: 3;
+}
+
+.btn-yes:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(216, 30, 91, 0.48), 0 0 22px rgba(244, 63, 110, 0.55);
+}
+
+.btn-yes:active, .btn-yes--active {
+  transform: scale(0.96);
+}
+
+.btn-choice-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  animation: btnGlowPass 3s ease-in-out infinite;
+}
+
+.btn-choice-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* NO BUTTON WRAPPER & DODGING BUTTON */
+.no-btn-wrapper {
+  position: relative;
+  z-index: 4;
+}
+
+.btn-no {
+  background: #ffffff;
+  color: var(--text-muted);
+  border: 2px solid var(--pink-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
+  will-change: transform;
+}
+
+.btn-no:hover {
+  background: #fff8fa;
+}
+
+.btn-no--dodged {
+  box-shadow: 0 8px 20px rgba(216, 30, 91, 0.2);
+  border-color: var(--pink-rose);
+}
+
+/* Attempts hint */
+.attempts-hint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+  font-family: var(--font-body);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .question-card {
+    padding: 38px 16px 22px;
+  }
+  
+  .btn-choice {
+    min-width: 108px;
+    min-height: 46px;
+    padding: 10px 18px;
+    font-size: 1.05rem;
+  }
+  
+  .question-action-area {
+    gap: 14px;
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 360px) {
+  .question-heading {
+    font-size: 1.3rem;
+  }
+  
+  .question-subtext {
+    font-size: 1.05rem;
+  }
+  
+  .btn-choice {
+    min-width: 96px;
+    padding: 8px 14px;
+    font-size: 0.98rem;
+  }
+}

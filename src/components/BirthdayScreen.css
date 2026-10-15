@@ -1,0 +1,458 @@
+/* ============================================================
+   BIRTHDAY SCREEN — Pink Scrapbook Aesthetic
+   ============================================================ */
+
+.birthday-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 30%, #fff7f9 0%, #fedce6 65%, #fbcfe0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: max(76px, env(safe-area-inset-top) + 60px) max(10px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+/* Background Stripes */
+.bday-stripes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bday-stripe { flex: 1; }
+.bs-pink  { background: #fed8e4; }
+.bs-blush { background: #fff5f8; }
+
+/* Floating Hearts */
+.bday-floating-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bday-float-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0.35;
+  animation: floatDrift 5s ease-in-out infinite alternate;
+}
+
+/* Scrapbook Card */
+.bday-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 3px solid var(--pink-border);
+  border-radius: 28px;
+  width: min(720px, 94vw);
+  margin: auto 0;
+  box-shadow: 0 16px 48px rgba(216, 30, 91, 0.16);
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bday-card--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Bunting */
+.bday-bunting {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+  padding-top: 4px;
+}
+
+.bunting-flag {
+  width: 30px;
+  height: 26px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.bunting-string {
+  height: 2px;
+  background: var(--pink-rose);
+  margin-top: -2px;
+}
+
+/* Main Content Row */
+.bday-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+  padding: 16px 18px 8px;
+  gap: 12px;
+}
+
+/* Balloons */
+.bday-balloons-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.bday-balloon-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: balloonRise 3.5s ease-in-out infinite;
+}
+
+.bday-balloon {
+  width: 44px;
+  height: 54px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.18), 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.balloon-shine {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 12px;
+  height: 16px;
+  background: rgba(255,255,255,0.45);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+.balloon-string {
+  width: 1px;
+  height: 28px;
+  background: #c28294;
+}
+
+/* Center Content */
+.bday-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.bday-photo-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 24px;
+}
+
+/* Party Hat */
+.bday-party-hat {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-24%) rotate(8deg);
+  z-index: 2;
+}
+
+.ph-cone {
+  width: 0;
+  height: 0;
+  border-left: 26px solid transparent;
+  border-right: 26px solid transparent;
+  border-bottom: 68px solid #f43f6e;
+  position: relative;
+}
+
+.ph-star {
+  position: absolute;
+  color: #ffd166;
+  font-size: 9px;
+}
+
+.ph-brim {
+  width: 56px;
+  height: 12px;
+  background: #ffd166;
+  border-radius: 50%;
+  margin-left: -2px;
+}
+
+.ph-tassel {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 18px;
+  width: 18px;
+}
+
+.ph-tassel-strand {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 12px;
+  background: #ffd166;
+  transform-origin: top;
+}
+
+/* Photo Frame */
+.bday-photo-frame {
+  width: 180px;
+  height: 165px;
+  border: 4px solid var(--pink-rose);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--pink-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(216, 30, 91, 0.15);
+}
+
+.bday-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bday-photo-frame--placeholder .bday-photo-placeholder {
+  display: block !important;
+}
+
+.bday-photo-placeholder {
+  display: none;
+  font-size: 11px;
+  color: var(--pink-rose);
+  font-family: var(--font-hand);
+  text-align: center;
+  padding: 8px;
+}
+
+/* Ransom Note HAPPY BIRTHDAY in pinks/reds/gold */
+.hb-text {
+  text-align: center;
+  line-height: 1.15;
+  margin-top: 4px;
+}
+
+.hb-letter {
+  display: inline-block;
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 900;
+  padding: 3px 6px;
+  margin: 1.5px;
+  border-radius: 5px;
+  font-family: 'Arial Black', sans-serif;
+  animation: wiggle 4s ease-in-out infinite;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.hb-l0 { background: #e11d48; color: white; transform: rotate(-3deg); }
+.hb-l1 { background: #f9c74f; color: #4a1525; transform: rotate(2deg); }
+.hb-l2 { background: #fb7185; color: white; transform: rotate(-2deg); }
+.hb-l3 { background: #f43f6e; color: white; transform: rotate(3deg); }
+.hb-l4 { background: #be123c; color: white; transform: rotate(-1deg); }
+
+.hb-b0 { background: #f9c74f; color: #4a1525; transform: rotate(2deg); }
+.hb-b1 { background: #fb7185; color: white; transform: rotate(-3deg); }
+.hb-b2 { background: #f43f6e; color: white; transform: rotate(2deg); }
+.hb-b3 { background: #e11d48; color: white; transform: rotate(-2deg); }
+.hb-b4 { background: #f9c74f; color: #4a1525; transform: rotate(3deg); }
+.hb-b5 { background: #ff85a2; color: white; transform: rotate(-2deg); }
+.hb-b6 { background: #e11d48; color: white; transform: rotate(2deg); }
+.hb-b7 { background: #f43f6e; color: white; transform: rotate(-3deg); }
+
+.hb-n0 { background: #e11d48; color: white; transform: rotate(-2deg); }
+.hb-n1 { background: #f9c74f; color: #4a1525; transform: rotate(2deg); }
+.hb-n2 { background: #fb7185; color: white; transform: rotate(-3deg); }
+.hb-n3 { background: #f43f6e; color: white; transform: rotate(3deg); }
+.hb-n4 { background: #e11d48; color: white; transform: rotate(-1deg); }
+
+.bday-stars-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.bday-gold-star {
+  font-size: 18px;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+
+/* Right Side — Disco Ball + Cat */
+.bday-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.disco-ball-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.disco-ball {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: repeating-linear-gradient(
+    45deg,
+    #fedce6 0px, #fedce6 4px,
+    #ffffff 4px, #ffffff 8px
+  );
+  box-shadow: inset -4px -4px 10px rgba(216, 30, 91, 0.2), 0 4px 14px rgba(216, 30, 91, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: starSpin 8s linear infinite;
+}
+
+.disco-shine {
+  position: absolute;
+  top: 6px; left: 6px;
+  width: 12px; height: 18px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+.disco-shine--2 {
+  top: 18px; left: 26px;
+  width: 7px; height: 10px;
+}
+
+.disco-string {
+  width: 1px;
+  height: 20px;
+  background: #c28294;
+}
+
+/* Party Cat */
+.bday-cat-right {
+  position: relative;
+  width: 56px;
+  height: 50px;
+}
+
+.bc-ear {
+  position: absolute;
+  top: -10px;
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 16px solid #ffd6e0;
+}
+
+.bc-ear--l { left: 4px; }
+.bc-ear--r { right: 4px; }
+
+.bc-head {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 42px;
+  background: #fff0f3;
+  border: 1.5px solid #f9a8be;
+  border-radius: 50% 50% 40% 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.bc-glasses {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.bc-lens {
+  width: 14px; height: 11px;
+  border: 2px solid #5d1a2e;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  background: rgba(255, 209, 102, 0.5);
+}
+
+.bc-bridge {
+  width: 5px;
+  height: 1.5px;
+  background: #5d1a2e;
+}
+
+.bc-nose {
+  width: 5px;
+  height: 4px;
+  background: #f43f6e;
+  border-radius: 50%;
+}
+
+.bday-cat-hat-small {
+  position: absolute;
+  top: -24px;
+  right: -2px;
+  font-size: 18px;
+}
+
+/* Footer & Next Button */
+.bday-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 20px 14px;
+}
+
+.bday-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #f43f6e 0%, #d81e5b 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(216, 30, 91, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bday-next-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(216, 30, 91, 0.42);
+}
+
+.bday-next-btn:active {
+  transform: scale(0.97);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .bday-balloons-left, .bday-right { display: none; }
+  .bday-photo-frame { width: 150px; height: 135px; }
+  .hb-letter { font-size: 1.25rem; padding: 2px 4px; }
+  .bday-card { border-radius: 20px; }
+  .bday-footer { justify-content: center; padding-bottom: 16px; }
+  .bday-next-btn { width: 100%; max-width: 260px; justify-content: center; }
+}
+
+@media (max-width: 360px) {
+  .bday-photo-frame { width: 130px; height: 120px; }
+  .hb-letter { font-size: 1.1rem; padding: 1px 3px; }
+}
